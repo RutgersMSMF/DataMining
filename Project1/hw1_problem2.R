@@ -52,7 +52,7 @@ checkGenre <- function(arg1, arg2) {
 
 movies$action_adventure = checkGenre(movies$Action, movies$Adventure)
 movies$rom_com = checkGenre(movies$Romance, movies$Comedy)
-movies$vote_budget = log_vote_count * movies$log_budget
+movies$vote_budget = movies$log_vote_count * movies$log_budget
 
 # Helper Method
 checkRuntime <- function(arg1) {
