@@ -54,6 +54,27 @@ sumError <- function(predicted, true, wts) {
   
 }
 
+IndicatorFunction <- function(predicted, true) {
+  
+  binaryError = rep(0, length(predicted))
+  
+  index = 1
+  for (p in predicted) {
+    
+    if (p == true[index]) {
+      binaryError[index] = 0
+    } else {
+      binaryError[index] = 1
+    }
+    
+    index = index + 1
+    
+  }
+  
+  return(binaryError)
+  
+}
+
 
 adaBoost <- function(X, Y, M) {
   
@@ -84,7 +105,8 @@ adaBoost <- function(X, Y, M) {
     alphas[m] = log((1 - errs[m]) / errs[m])
     
     ## FILL IN
-    wts = wts * exp(alphas[m] * errorVector)
+    new_vector = IndicatorFunction(Ypred, Y1)
+    wts = wts * exp(alphas[m] * new_vector)
 
   }
   
@@ -178,11 +200,11 @@ decisionStumpClassifier <- function(X, Y, wts) {
 
 
 # Test decision stump:
-X1 = c(1,1,1,1,2,2,2,3,4,4,4,4,4)
-X2 = runif(13)
-X = cbind(X1, X2)
-Y = c(rep(1,6), rep(-1,7))
-test_result = decisionStumpClassifier(X, Y, rep(1/13, 13))
+# X1 = c(1,1,1,1,2,2,2,3,4,4,4,4,4)
+# X2 = runif(13)
+# X = cbind(X1, X2)
+# Y = c(rep(1,6), rep(-1,7))
+# test_result = decisionStumpClassifier(X, Y, rep(1/13, 13))
 
 ####################
 ## Running adaBoost on the movies data set. 
@@ -195,7 +217,8 @@ set.seed(1)
 # movies = read.csv("movies_hw3.csv")
 
 # Local Machine Path
-movies = read.csv("C:/Users/steve/Documents/GitHub/DataMining/Project3/movies_hw3.csv")
+# movies = read.csv("C:/Users/steve/Documents/GitHub/DataMining/Project3/movies_hw3.csv")
+movies = read.csv("C:/Users/18627/Documents/GitHub/DataMining/Project3/movies_hw3.csv")
 movies = na.omit(movies)
 
 Y = ifelse(movies[, "vote_average"] > mean(movies[, "vote_average"]), 1, -1)
