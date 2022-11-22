@@ -101,7 +101,7 @@ for (k in 1:nfold){
 
       ## FILL IN; see definition of "K"
       # From Notes: alpha = (K - l*I)^-1 * Y
-      IdentityMatrix = diag(240)
+      IdentityMatrix = diag(nrow(K))
       alpha = solve(K + (lambda * IdentityMatrix)) %*% Ytrain
       
       ## Ypred[i] should be predicted value for Xvalid[i]
@@ -150,7 +150,7 @@ K2 = exp( - x1_test_dists/ hstar^2 )
 
 ## FILL IN; see definition of K
 # Use Best Fit Lambda
-IdentityMatrix = diag(300)
+IdentityMatrix = diag(nrow(K))
 alpha = solve(K + (lambda_star * IdentityMatrix)) %*% Y1
   
 ## Ypred[i] should be predicted value of Xtest[i]

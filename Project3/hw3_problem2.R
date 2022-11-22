@@ -108,7 +108,7 @@ for(i in 1:length(BootStrap)) {
     for (i in 1:500) {
       
       # Generate Random Number
-      rv = sample(1:500, size = 1, replace = TRUE)
+      rv = sample(1:500, size = 1, replace = TRUE) # Replacement = True
       
       # Sample From Rows
       for (j in 1:77) {

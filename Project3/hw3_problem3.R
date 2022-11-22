@@ -96,7 +96,7 @@ adaBoost <- function(X, Y, M) {
     
     Ypred = ifelse(X[, feat_to_split[m]] > thresh_to_split[m], 1, -1)
     
-    errorVector = sumError(Ypred, Y1, wts)
+    errorVector = sumError(Ypred, Y, wts)
 
     ## FILL IN
     errs[m] = sum(errorVector) / sum(wts)
@@ -105,7 +105,7 @@ adaBoost <- function(X, Y, M) {
     alphas[m] = log((1 - errs[m]) / errs[m])
     
     ## FILL IN
-    new_vector = IndicatorFunction(Ypred, Y1)
+    new_vector = IndicatorFunction(Ypred, Y)
     wts = wts * exp(alphas[m] * new_vector)
 
   }
@@ -217,8 +217,8 @@ set.seed(1)
 # movies = read.csv("movies_hw3.csv")
 
 # Local Machine Path
-# movies = read.csv("C:/Users/steve/Documents/GitHub/DataMining/Project3/movies_hw3.csv")
-movies = read.csv("C:/Users/18627/Documents/GitHub/DataMining/Project3/movies_hw3.csv")
+movies = read.csv("C:/Users/steve/Documents/GitHub/DataMining/Project3/movies_hw3.csv")
+# movies = read.csv("C:/Users/18627/Documents/GitHub/DataMining/Project3/movies_hw3.csv")
 movies = na.omit(movies)
 
 Y = ifelse(movies[, "vote_average"] > mean(movies[, "vote_average"]), 1, -1)
